@@ -141,6 +141,7 @@ body {
     opacity: 0; }
 
 .btn:active, .btn:focus {
+  outline: none;
   transform: translateY(-1px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
 
@@ -368,7 +369,7 @@ body {
   transform: translateY(-4rem); }
 
 .form__radio-group {
-  width: 45%;
+  width: 40%;
   display: inline-block; }
 
 .form__radio-input {
@@ -383,12 +384,12 @@ body {
 .form__radio-button {
   height: 3rem;
   width: 3rem;
-  border: 1px solid #55c57a;
+  border: 5px solid #55c57a;
   border-radius: 50%;
   display: inline-block;
   position: absolute;
   left: 0;
-  top: -.4rem; }
+  top: 0; }
   .form__radio-button::after {
     height: 1.3rem;
     width: 1.3rem;
@@ -565,10 +566,10 @@ body {
 
 .book {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/nat-10.jpg);
-  background-size: 100%;
+  background-size: cover;
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
-  height: 50rem; }
+  height: 60rem; }
   .book__form {
     width: 50%;
     padding: 6rem; }
