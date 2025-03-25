@@ -163,6 +163,17 @@ exports.getMonthlyPlan = async (req, res) => {
       },
       {
         $addFields: { month: '$_id' }
+      },
+      {
+        $project: {
+          _id: 0
+        }
+      },
+      {
+        $sort: { numTourStats: -1 }
+      },
+      {
+        $limit: 12
       }
     ]);
 
