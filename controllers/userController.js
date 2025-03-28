@@ -1,65 +1,64 @@
-const fs = require('fs');
+const User = require('./../models/userModel');
+const catchAsync = require('./../utils/catchAsync');
 
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`, 'utf-8')
-);
+exports.getAllUsers = catchAsync(async (req, res) => {
+  const users = await User.find();
 
-exports.getAllUsers = (req, res) => {
   res.status(200).json({
     status: 'success',
-    results: tours.length,
+    results: users.length,
     data: {
-      tours,
-    },
+      users
+    }
   });
-};
+});
 
 exports.getUser = (req, res) => {
   const tourId = req.params.tourId * 1;
-  const tour = tours.find((el) => el.id === tourId);
+  const tour = tours.find(el => el.id === tourId);
   if (!tour)
     return res.status(404).json({
       status: 'fail',
-      message: 'Invalid ID',
+      message: 'Invalid ID'
     });
 
   res.status(200).json({
     status: 'success',
     data: {
-      tour,
-    },
+      tour
+    }
   });
 };
 
 exports.updateUser = (req, res) => {
   const tourId = req.params.tourId * 1;
-  const tour = tours.find((el) => el.id === tourId);
+  const tour = tours.find(el => el.id === tourId);
   if (!tour)
     return res.status(404).json({
       status: 'fail',
-      message: 'Invalid ID',
+      message: 'Invalid ID'
     });
 
   res.status(200).json({
     status: 'success',
     data: {
-      tour,
-    },
+      tour
+    }
   });
 };
 
 exports.deleteUser = (req, res) => {
   const tourId = req.params.tourId * 1;
-  const tour = tours.filter((el) => el.id === tourId);
+  const tour = tours.filter(el => el.id === tourId);
 
   if (!tour)
     return res.status(404).json({
       status: 'fail',
-      message: 'Invalid ID',
+      message: 'Invalid ID'
     });
 
   res.status(204).json({
     status: 'success',
-    data: null,
+    data: null
   });
 };
