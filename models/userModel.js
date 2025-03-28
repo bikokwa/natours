@@ -33,8 +33,10 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', async function(next) {
+  // user changed, for example, the email
   if (!this.isModified('password')) return next();
 
+  // encrypt when new or changed
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
   next();
