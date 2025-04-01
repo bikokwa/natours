@@ -13,22 +13,16 @@ exports.getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
-exports.getUser = (req, res) => {
-  const tourId = req.params.tourId * 1;
-  const tour = tours.find(el => el.id === tourId);
-  if (!tour)
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID'
-    });
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
 
   res.status(200).json({
     status: 'success',
     data: {
-      tour
+      user
     }
   });
-};
+});
 
 exports.updateUser = (req, res) => {
   const tourId = req.params.tourId * 1;
