@@ -1,7 +1,16 @@
+const AppError = require('../utils/appError');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 
-exports.getAllUsers = catchAsync(async (req, res) => {
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
+
+exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
 
   res.status(200).json({
@@ -40,6 +49,34 @@ exports.updateUser = (req, res) => {
     }
   });
 };
+
+exports.updateMe = catchAsync(async (req, res, next) => {
+  // create error if user POSTs password data
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new AppError(
+        'This route is not for password updates. Please use /updateMyPassword.',
+        400
+      )
+    );
+  }
+
+  // update user document
+  const filteredBody = filterObj(req.body, 'name', 'email');
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+    new: true,
+    runValidators: true
+  });
+
+  const token = '';
+  res.status(200).json({
+    status: 'success',
+    token,
+    data: {
+      user: updatedUser
+    }
+  });
+});
 
 exports.deleteUser = (req, res) => {
   const tourId = req.params.tourId * 1;
