@@ -23,17 +23,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.userId);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user
-    }
-  });
-});
-
+exports.getUser = factory.getOne(User);
 exports.updateUser = factory.updateOne(User);
 exports.updateMe = catchAsync(async (req, res, next) => {
   // create error if user POSTs password data
