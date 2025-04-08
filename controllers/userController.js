@@ -34,23 +34,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateUser = (req, res) => {
-  const tourId = req.params.tourId * 1;
-  const tour = tours.find(el => el.id === tourId);
-  if (!tour)
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID'
-    });
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      tour
-    }
-  });
-};
-
+exports.updateUser = factory.updateOne(User);
 exports.updateMe = catchAsync(async (req, res, next) => {
   // create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
