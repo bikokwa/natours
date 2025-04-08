@@ -1,6 +1,7 @@
 const AppError = require('../utils/appError');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -89,18 +90,4 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteUser = (req, res) => {
-  const tourId = req.params.tourId * 1;
-  const tour = tours.filter(el => el.id === tourId);
-
-  if (!tour)
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID'
-    });
-
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-};
+exports.deleteUser = factory.deleteOne(User);

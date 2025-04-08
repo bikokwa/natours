@@ -21,7 +21,7 @@ router.delete('/deleteMe', authController.protect, userController.deleteMe);
 
 router.route('/').get(userController.getAllUsers);
 router
-  .route('/:userId')
+  .route('/:id')
   .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
