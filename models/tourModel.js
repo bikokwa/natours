@@ -111,6 +111,8 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
+tourSchema.index({ startLocation: '2dsphere' });
+
 tourSchema.virtual('durationWeeks').get(function() {
   return this.duration / 7;
 });
