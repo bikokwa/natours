@@ -1,5 +1,6 @@
 extends base
 
+
 mixin reviewCard(review)
   .reviews__card
     .reviews__avatar
@@ -73,7 +74,7 @@ block content
         img.picture-box__img(src=`/img/tours/${img}`, class=`picture-box__img--${i + 1}`, alt=`The Park Camper Tour ${i + 1}`)
       
   section.section-map
-    #map
+    #map(data-locations=`${JSON.stringify(tour.locations)}`)
 
   section.section-reviews
     .reviews
