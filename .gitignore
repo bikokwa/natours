@@ -2,12 +2,12 @@ node_modules
 
 *.env
 
-dist/
+# dist/
 
-build/
+# build/
 
-/public/js/bundle.js
+# /public/js/bundle.js
 
-/public/js/bundle.js.map
+# /public/js/bundle.js.map
 
 .cache
