@@ -16,7 +16,7 @@ exports.createUser = (req, res) => {
   const newId = users[users.length - 1].id + 1;
   const newUser = Object.assign({ id: newId }, req.body);
   users.push(newUser);
-  fs.writeFile(`${__dirname}/dev-data/data/users.json`, JSON.stringify(users), err => {
+  fs.writeFile(`${__dirname}/../dev-data/data/users.json`, JSON.stringify(users), err => {
     res.status(201).json({
       status: 'success',
       data: {
@@ -27,8 +27,8 @@ exports.createUser = (req, res) => {
 }
 
 exports.getUser = (req, res) => {
-  const id = req.params.id * 1;
-  const user = users.find(el => el.id === id);
+  const id = req.params._id;
+  const user = users.find(el => el._id === id);
 
   if (!user) {
     return res.status(404).json({
@@ -56,7 +56,7 @@ exports.updateUser = (req, res) => {
   }
 
   const updatedUser = Object.assign(user, req.body);
-  fs.writeFile(`${__dirname}/dev-data/data/users.json`, JSON.stringify(users), err => {
+  fs.writeFile(`${__dirname}/../dev-data/data/users.json`, JSON.stringify(users), err => {
     res.status(200).json({
       status: 'success',
       data: {
@@ -78,7 +78,7 @@ exports.deleteUser = (req, res) => {
   }
 
   users.splice(userIndex, 1);
-  fs.writeFile(`${__dirname}/dev-data/data/users.json`, JSON.stringify(users), err => {
+  fs.writeFile(`${__dirname}/../dev-data/data/users.json`, JSON.stringify(users), err => {
     res.status(204).json({
       status: 'success',
       data: null
