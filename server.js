@@ -1,6 +1,7 @@
 const dns = require('dns');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 const app = require('./app');
 
 dns.setServers([
@@ -8,7 +9,6 @@ dns.setServers([
   '8.8.4.4',
 ]);
 
-dotenv.config({ path: './config.env' });
 
 async function connectDB() {
   try {
